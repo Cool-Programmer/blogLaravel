@@ -5,6 +5,7 @@
   @include('partials._nav')
     
     <div class="container">{{--CONTAINER STARTED--}}
+        @include('partials._messages')
         @yield('content')
     </div> 
     {{--CONTAINER ENDED--}}
