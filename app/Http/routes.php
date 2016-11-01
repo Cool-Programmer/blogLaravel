@@ -25,3 +25,23 @@ Route::resource('posts', 'PostController');
 
 // route for controlling slug
 Route::get('/blog/{slug}', ['as'=>'blog.single', 'uses'=>'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
+
+// route for displaying all blog posts
+Route::get('/blog', ['as'=>'blog.index', 'uses'=>'BlogController@getIndex']);
+
+// AUTH ROUTS
+// Get login
+Route::get('auth/login', ['as'=>'login', 'uses'=>'Auth\AuthController@getLogin']);
+
+// Submit login
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+
+// Logout
+Route::get('auth/logout', ['as'=>'logout', 'uses'=>'Auth\AuthController@getLogout']);
+
+// REGISTRATION ROUTES
+// Get registration form
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+
+// Submit registration
+Route::post('auth/register', 'Auth\AuthController@postRegister');
