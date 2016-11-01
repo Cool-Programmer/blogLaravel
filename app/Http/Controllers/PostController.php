@@ -45,10 +45,12 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title'=>'required|min:5|max:250',
+            'slug'=>'required|alpha_dash|min:5|max:250|unique:posts, slug',
             'body'=>'required|min:10'
         ]);
         $post = new Post();
         $post->title = $request->title;
+        $post->slug  = $request->slug;
         $post->body  = $request->body;
         $post->save();
         Session::flash('success', 'Post successfully created!');
@@ -88,12 +90,24 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title'=>'required|min:5|max:250',
-            'body'=>'required|min:10'
-        ]);
+        $input = $request->all();
+        $post = Post::find($id);
+        if ($request->$input['slug'] = $post->slug) {
+            $this->validate($request, [
+                'title'=>'required|min:5|max:250',
+                'body'=>'required|min:10'
+            ]);
+        }else {
+            $this->validate($request, [
+                'title'=>'required|min:5|max:250',
+                'slug'=>'required|alpha_dash|min:5|max:250|unique:posts, slug',
+                'body'=>'required|min:10'
+            ]);
+        }
+       
         $post = Post::findOrFail($id);
         $post->title = $request->title;
+        $post->slug  = $request->slug; 
         $post->body  = $request->body;
         $post->save();
         Session::flash('success', 'Post successfully updated!');

@@ -15,6 +15,9 @@
 				{!! Form::label('title', 'Title', ['class'=>'label label-primary']) !!}
 				{!! Form::text('title', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'3', 'data-parsley-maxlength'=>'255']) !!}
 				<br>
+				{!! Form::label('slug', 'URL Slug', ['class'=>'label label-primary']) !!}
+				{!! Form::text('slug', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'3', 'data-parsley-maxlength'=>'255']) !!}
+				<br>
 				{!! Form::label('body', 'Content', ['class'=>'label label-primary']) !!}
 				{!! Form::textarea('body', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'20']) !!}
 				<br>				
@@ -22,12 +25,12 @@
 			<div class="col-md-4">
 				<div class="well">
 					<dl class="dl-horizontal">
-						<dt>Created</dt>
-						<dd>{{date('M j, Y H:i', strtotime($post->created_at))}}</dd>
+						<label>Created</label>
+						<span>{{date('M j, Y H:i', strtotime($post->created_at))}}</span>
 					</dl>
 					<dl class="dl-horizontal">
-						<dt>Modified</dt>
-						<dd>{{date('M j, Y H:i', strtotime($post->updated_at))}}</dd>
+						<label>Modified</label>
+						<span>{{date('M j, Y H:i', strtotime($post->updated_at))}}</span>
 					</dl>
 					<hr>
 					<div class="row">

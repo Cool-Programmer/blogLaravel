@@ -12,12 +12,16 @@
 			<div class="col-md-4">
 				<div class="well">
 					<dl class="dl-horizontal">
-						<dt>Created</dt>
-						<dd>{{date('M j, Y H:i', strtotime($post->created_at))}}</dd>
+						<label>URL</label>
+						<span><a href="{{url('blog/'.$post->slug)}}">{{url('blog/'.$post->slug)}}</a></span>
 					</dl>
 					<dl class="dl-horizontal">
-						<dt>Modified</dt>
-						<dd>{{date('M j, Y H:i', strtotime($post->updated_at))}}</dd>
+						<label>Created</label>
+						<span>{{date('M j, Y H:i', strtotime($post->created_at))}}</span>
+					</dl>
+					<dl class="dl-horizontal">
+						<label>Modified</label>
+						<span>{{date('M j, Y H:i', strtotime($post->updated_at))}}</span>
 					</dl>
 					<hr>
 					<div class="row">

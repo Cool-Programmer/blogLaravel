@@ -15,7 +15,10 @@
 				<hr>
 				{!! Form::open(['route'=>'posts.store', 'data-parsley-validate'=>'']) !!}
 					{!! Form::label('title', 'Title', ['class'=>'label label-primary']) !!}
-					{!! Form::text('title', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'3', 'data-parsley-maxlength'=>'255']) !!}
+					{!! Form::text('title', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'5', 'data-parsley-maxlength'=>'255']) !!}
+					<br>
+					{!! Form::label('slug', 'Slug', ['class'=>'label label-primary']) !!}
+					{!! Form::text('slug', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'5', 'data-parsley-maxlength'=>'255']) !!}
 					<br>
 					{!! Form::label('body', 'Content', ['class'=>'label label-primary']) !!}
 					{!! Form::textarea('body', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'20']) !!}

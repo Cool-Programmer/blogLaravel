@@ -24,6 +24,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
+        'slug' => $faker->slug,
         'created_at'=>$faker->dateTime,
         'updated_at'=>$faker->dateTime,
     ];

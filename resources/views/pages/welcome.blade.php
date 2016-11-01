@@ -18,7 +18,7 @@
                     <div class="post">
                         <h3 class="hd" style="display: inline;">{{$post->title}}</h3> on <span class="small text-muted">{{date('M j, Y H:i', strtotime($post->created_at))}}</span>
                         <p>{{strlen($post->body)>300 ? substr($post->body, 0, 300).'...' : $post->body}}</p>
-                        <a class="btn btn-primary btn-sm" href="#">Read more</a>
+                        <a class="btn btn-primary btn-sm" href="{{route('blog.single', $post->slug)}}">Read more</a>
                     </div>
                     <hr>
                 @endforeach()

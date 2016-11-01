@@ -22,3 +22,6 @@ Route::get('/', ['as'=>'home', 'uses'=>'PagesController@getIndex'], 'PagesContro
 
 // restful route to post crud
 Route::resource('posts', 'PostController');
+
+// route for controlling slug
+Route::get('/blog/{slug}', ['as'=>'blog.single', 'uses'=>'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
