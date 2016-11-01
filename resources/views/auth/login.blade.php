@@ -15,6 +15,7 @@
 					{!! Form::label('password', 'Password', ['class'=>'label label-primary']) !!}
 					{!! Form::password('password', ['class'=>'form-control']) !!}
 				</div>
+				<span class="text-muted pull-right"><a href="{{route('sendemail')}}">Forgot password?</a></span>
 				<div class="form-group">
 					{!! Form::checkbox('remember') !!}{!! Form::label('remember', 'Remember me') !!}
 				</div>

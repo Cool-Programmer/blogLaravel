@@ -8,7 +8,7 @@
 	<h1 class="page-header">All posts</h1>
 	    @foreach($posts as $post)
 	        <div class="post">
-	            <h3 class="hd" style="display: inline;">{{$post->title}}</h3> <span class="small text-muted">{{date('M j, Y H:i', strtotime($post->created_at))}}</span>
+	            <h3 style="display: inline;">{{$post->title}}</h3> <span class="small text-muted">{{date('M j, Y H:i', strtotime($post->created_at))}}</span>
 	            <p>{{strlen($post->body)>300 ? substr($post->body, 0, 300).'...' : $post->body}}</p>
 	            <a class="btn btn-primary btn-sm" href="{{route('blog.single', $post->slug)}}">Read more</a>
 	        </div>
