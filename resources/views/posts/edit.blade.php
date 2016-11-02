@@ -5,6 +5,7 @@
 
 	@section('stylesheets')
 		{!! Html::style('css/parsley.css') !!}
+		{!! Html::style('css/select2.min.css') !!}
 	@endsection()
 
 	@section('content')
@@ -25,6 +26,20 @@
 						<option value="{{$category->id}}">{{$category->name}}</option>
 					@endforeach()
 				</select>
+				<br>
+
+				{!! Form::label('tags', 'Select tags', ['class'=>'label label-primary']) !!}
+				{{-- {!! Form::select('tags', $tags->name, null, ['class'=>'form-control multipleSelect', 'multiple'=>'multiple']) !!} --}}
+				<select name="tags" id="tags" class="form-control multipleSelect" multiple="multiple">
+					<option value="">Select one</option>
+					@foreach($tags as $tag)
+						<option value="{{$tag->id}}">{{$tag->name}}</option>
+					@endforeach()
+				</select>
+				<br>
+
+
+
 				<br>
 				{!! Form::label('body', 'Content', ['class'=>'label label-primary']) !!}
 				{!! Form::textarea('body', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'20']) !!}
@@ -57,4 +72,10 @@
 
 	@section('scripts')
 		{!! Html::script('js/parsley.min.js') !!}
+		{!! Html::script('js/select2.min.js') !!}
+
+<script>
+	$('.multipleSelect').select2();
+	$('.multipleSelect').select2().val({!!json_encode($post->tags()->getRelatedIds())!!}).trigger('change');
+</script>
 	@endsection()

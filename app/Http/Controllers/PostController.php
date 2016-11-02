@@ -12,6 +12,8 @@ use App\Post;
 
 use App\Category;
 
+use App\Tag;
+
 class PostController extends Controller
 {
 
@@ -42,7 +44,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -53,9 +56,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
             'title'=>'required|min:5|max:250',
             'slug'=>'required|alpha_dash|min:5|max:250|unique:posts',
+            'category_id'=>'required',
             'body'=>'required|min:10'
         ]);
         $post = new Post();
@@ -64,8 +69,10 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->body  = $request->body;
         
-        
         $post->save();
+        
+        $post->tags()->sync($request->tags, false);
+        
         Session::flash('success', 'Post successfully created!');
         return redirect()->route('posts.show', $post->id);
     }
@@ -92,7 +99,12 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        $tags2 = [];
+        foreach ($tags as $tag) {
+            $tags2[$tag->id] = $tag->name; 
+        }
+        return view('posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -104,6 +116,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $input = $request->all();
         $post = Post::find($id);
         if ($request->$input['slug'] = $post->slug) {
@@ -125,6 +138,15 @@ class PostController extends Controller
         $post->category_id  = $request->category_id; 
         $post->body  = $request->body;
         $post->save();
+        
+        $request->tags = array($request->tags);
+
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags);    
+        }else {
+            $post->tags()->sync(array());
+        }
+
         Session::flash('success', 'Post successfully updated!');
         return redirect(route('posts.index'));
     }

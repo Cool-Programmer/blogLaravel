@@ -1,0 +1,1 @@
+$('.multipleSelect').select2();

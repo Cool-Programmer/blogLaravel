@@ -6,6 +6,7 @@
 	{{-- CSS FOR JAVASCRIPT FORM VALIDATION --}}
 	@section('stylesheets')
 		{!! Html::style('css/parsley.css') !!}
+		{!! Html::style('css/select2.min.css') !!}
 	@endsection()
 
 	@section('content')
@@ -28,6 +29,15 @@
 						@endforeach()
 					</select>
 					<br>
+					{!! Form::label('tags', 'Select tags', ['class'=>'label label-primary']) !!}
+					<select name="tags[]" id="tags" class="form-control multipleSelect" multiple="multiple">
+						{{-- <option value="">Select one</option> --}}
+						@foreach($tags as $tag)
+							<option value="{{$tag->id}}">{{$tag->name}}</option>
+						@endforeach()
+					</select>
+					<br>
+					<br>
 					{!! Form::label('body', 'Content', ['class'=>'label label-primary']) !!}
 					{!! Form::textarea('body', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'20']) !!}
 					<br>
@@ -39,4 +49,6 @@
 
 	@section('scripts')
 		{!! Html::script('js/parsley.min.js') !!}
+		{!! Html::script('js/select2.min.js') !!}
+		{!! Html::script('js/scripts.js') !!}
 	@endsection()

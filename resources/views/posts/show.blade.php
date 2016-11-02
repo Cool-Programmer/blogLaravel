@@ -8,6 +8,12 @@
 			<div class="col-md-8">
 				<h1>{{$post->title}}</h1>
 				<p>{{$post->body}}</p>
+				<hr>
+				<p><em>Tags:</em>
+					@foreach($post->tags as $tag)
+						<span class="label label-success">{{$tag->name}}</span>
+					@endforeach()
+				</p>
 			</div>
 			<div class="col-md-4">
 				<div class="well">
