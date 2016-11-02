@@ -20,6 +20,14 @@
 					{!! Form::label('slug', 'Slug', ['class'=>'label label-primary']) !!}
 					{!! Form::text('slug', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'5', 'data-parsley-maxlength'=>'255']) !!}
 					<br>
+					{!! Form::label('category_id', 'Select a category', ['class'=>'label label-primary']) !!}
+					<select name="category_id" id="category_id" class="form-control">
+						<option value="">Select one</option>
+						@foreach($categories as $category)
+							<option value="{{$category->id}}">{{$category->name}}</option>
+						@endforeach()
+					</select>
+					<br>
 					{!! Form::label('body', 'Content', ['class'=>'label label-primary']) !!}
 					{!! Form::textarea('body', null, ['class'=>'form-control', 'data-parsley-required'=>'true', 'data-parsley-minlength'=>'20']) !!}
 					<br>

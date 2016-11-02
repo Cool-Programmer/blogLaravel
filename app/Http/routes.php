@@ -47,6 +47,14 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // PASSWORD RESETS
+// Get request to show the form, where user enters his email
 Route::get('password/reset/{token?}', ['as'=>'sendemail', 'uses'=>'Auth\PasswordController@showResetForm']);
+
+// Send link
 Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+
+// Reset
 Route::post('password/reset', 'Auth\PasswordController@reset');
+
+// CATEGORIES
+Route::resource('categories', 'CategoryController', ['except'=>['create']]);

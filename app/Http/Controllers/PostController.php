@@ -8,9 +8,9 @@ use App\Http\Requests;
 
 use Session;
 
-
 use App\Post;
 
+use App\Category;
 
 class PostController extends Controller
 {
@@ -41,7 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -54,13 +55,16 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title'=>'required|min:5|max:250',
-            'slug'=>'required|alpha_dash|min:5|max:250|unique:posts, slug',
+            'slug'=>'required|alpha_dash|min:5|max:250|unique:posts',
             'body'=>'required|min:10'
         ]);
         $post = new Post();
         $post->title = $request->title;
         $post->slug  = $request->slug;
+        $post->category_id = $request->category_id;
         $post->body  = $request->body;
+        
+        
         $post->save();
         Session::flash('success', 'Post successfully created!');
         return redirect()->route('posts.show', $post->id);
@@ -86,8 +90,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'));
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -117,6 +122,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->slug  = $request->slug; 
+        $post->category_id  = $request->category_id; 
         $post->body  = $request->body;
         $post->save();
         Session::flash('success', 'Post successfully updated!');

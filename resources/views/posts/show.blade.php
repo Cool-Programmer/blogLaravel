@@ -16,6 +16,10 @@
 						<span><a href="{{url('blog/'.$post->slug)}}">{{url('blog/'.$post->slug)}}</a></span>
 					</dl>
 					<dl class="dl-horizontal">
+						<label>Category</label>
+						<span><a href="{{route('categories.index')}}">{{$post->category->name}}</a></span>
+					</dl>
+					<dl class="dl-horizontal">
 						<label>Created</label>
 						<span>{{date('M j, Y H:i', strtotime($post->created_at))}}</span>
 					</dl>
