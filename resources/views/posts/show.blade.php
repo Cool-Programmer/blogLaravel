@@ -17,7 +17,7 @@
 					</dl>
 					<dl class="dl-horizontal">
 						<label>Category</label>
-						<span><a href="{{route('categories.index')}}">{{$post->category->name}}</a></span>
+						<span><a href="{{route('categories.show', $post->category->id)}}">{{$post->category->name}}</a></span>
 					</dl>
 					<dl class="dl-horizontal">
 						<label>Created</label>

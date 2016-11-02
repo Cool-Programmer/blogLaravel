@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Category;
 
+use App\Post;
+
 
 class CategoryController extends Controller
 {
@@ -56,7 +58,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $posts = Post::where('category_id','=',$category->id)->get();
+        return view('categories.show', compact('category', 'posts'));
     }
 
     /**
